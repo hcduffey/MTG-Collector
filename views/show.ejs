@@ -1,0 +1,141 @@
+<%- include('partials/header.ejs') %>
+
+<%- include('partials/nav.ejs') %>
+
+<main>
+    <!-- Messages to provide status of an attempted edit -->
+    <% if(flash === "true") { %>
+    <section class="hero is-success">
+        <div class="hero-body has-text-centered">
+          <p class="title">
+            Success
+          </p>
+          <p class="subtitle">
+            Card Updated
+          </p>
+        </div>
+    </section>
+    <% } %>
+    <% if(flash === "error") { %>
+        <section class="hero is-danger">
+            <div class="hero-body has-text-centered">
+              <p class="title">
+                Error
+              </p>
+              <p class="subtitle">
+                Could not update card (check card name)
+              </p>
+            </div>
+        </section>
+    <% } %>
+
+    <!-- Displays the card details -->
+    <!-- https://stackoverflow.com/questions/61991427/how-do-i-make-a-horizontal-card-in-bulma -->
+    <section class="section">
+        <div class="card">
+          <div class="card-content">
+            <div class="content">
+              <div class="columns">
+                <div class="column is-narrow">
+                  <div class="card-image">
+                    <figure class="image is-256x256">
+                        <img src="<%= card.imageUrl %>" alt="magic card">
+                    </figure>
+                    <div class="media-content has-text-centered">
+                      <p class="title is-4">
+                        <%= card.name %>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="column card-detail">
+                  <nav class="level">
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="card-text"><%= card.type %></p>
+                        <p class="heading">Type</p>
+                      </div>
+                    </div>
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="card-text"><%= card.rarity %></p>
+                        <p class="heading">Rarity</p>
+                      </div>
+                    </div>
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="card-text"><%= card.artist %></p>
+                        <p class="heading">Artist</p>
+                      </div>
+                    </div>
+                    <div class="level-item has-text-centered">
+                      <div>
+                        <p class="card-text"><%= card.set %></p>
+                        <p class="heading">Set</p>
+                      </div>
+                    </div>
+                  </nav>
+                  <div class="has-text-centered">
+                     <div>
+                         <p class="heading">Card Text</p>
+                         <p class="card-text"><%= card.text %></p>
+                     </div>
+                  </div>
+                  <footer class="card-footer">
+                    <a id="edit-lnk" href="#" class="card-footer-item has-text-centered">edit</a>
+                    <a id="delete-lnk" href="#" class="card-footer-item has-text-centered">delete</a>
+                  </footer>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="delete-modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Confirm Remove</p>
+            <button class="delete no-delete-btn" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <!-- Content ... -->
+            Are you sure you want to remove this card from your collection?
+            <form action="/collection/<%= index %>?_method=DELETE" method="POST">
+          </section>
+          <footer class="modal-card-foot">
+                 <button type="submit" class="button is-danger">Yes</button>
+            </form>
+            <div class="block">
+                <button class="button no-delete-btn">No</button>
+            </div>
+          </footer>
+        </div>
+      </div>
+
+      <div id="edit-modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Modify Card</p>
+            <button class="delete no-delete-btn" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            Enter the name of the card to change to:
+            <form action="/collection/<%= index %>?_method=PATCH" method="POST">
+                <input type="text" name="name">
+          </section>
+          <footer class="modal-card-foot">
+                 <button type="submit" class="button is-warning">Submit</button>
+            </form>
+            <div class="block">
+              <button class="button no-delete-btn">No</button>
+            </div>
+          </footer>
+        </div>
+      </div>
+
+</main>
+
+<%- include('partials/footer.ejs') %>

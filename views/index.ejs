@@ -1,0 +1,45 @@
+<%- include('partials/header.ejs') %>
+
+<%- include('partials/nav.ejs') %>
+
+<main>
+    <!-- Show message to user when they've deleted a card -->
+    <% if(flash === "true") { %>
+        <section class="hero is-danger">
+            <div class="hero-body has-text-centered">
+              <p class="title">
+                Success
+              </p>
+              <p class="subtitle">
+                Card Removed
+              </p>
+            </div>
+        </section>
+    <% } %>
+
+    <div class="block"></div>
+    
+    <section>
+        <div class="card">
+            <div class="columns card-index-container">
+                <% for(let i=0; i < collection.length; i++) { %>
+                    <div class="column is-one-fifth">
+                        <div class="tile">
+                            <figure class="image">
+                                <img src="<%= collection[i].imageUrl %>" alt="magic card">
+                            </figure>
+                            
+                            <div class="card">
+                                <footer class="card-footer">
+                                    <a href="/collection/<%= i %>" class="card-footer-item">View</a>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer.ejs') %>

@@ -1,0 +1,15 @@
+.card-index-container {
+    flex-wrap: wrap;
+}
+
+.card-detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tile {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

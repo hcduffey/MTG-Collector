@@ -1,0 +1,26 @@
+{
+  "name": "cyoa-crud-lab",
+  "version": "1.0.0",
+  "description": "## Day 1 First Steps",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hcduffey/CYOA-CRUD-Lab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hcduffey/CYOA-CRUD-Lab/issues"
+  },
+  "homepage": "https://github.com/hcduffey/CYOA-CRUD-Lab#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "method-override": "^3.0.0",
+    "mtgsdk": "^1.0.0"
+  }
+}
