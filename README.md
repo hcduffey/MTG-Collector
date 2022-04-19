@@ -82,6 +82,7 @@ MTG-Collector uses the Magic: the Gathering API to allow users to add, remove an
 * [Bulma](https://bulma.io/)
 * [JQuery](https://jquery.com)
 * [Express](https://expressjs.com/)
+* [EJS](https://ejs.co/)
 * [MTG-API](https://github.com/MagicTheGathering/mtg-sdk-javascript)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
