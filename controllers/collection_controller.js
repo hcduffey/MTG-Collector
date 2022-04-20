@@ -26,19 +26,32 @@ router.get("/", (req, res) => {
     if(req.query.message === 'true') {
         flash = "true";
     }
+    else if(req.query.message === 'error') {
+        flash = "error";
+    }
+    else if(req.query.message === 'added') {
+        flash = "added";
+    }
+
     res.render('index.ejs', {collection: collection, flash: flash});
 });
 
 // creates a new card
 router.post('/', (req, res) => {
-    mtg.card.where({ name: req.body.name })
-    .then(cards => {
-        if(cards.length > 0) {
-            collection.push(cards.filter(card => typeof card.imageUrl !== 'undefined')[0]);
-        }
-       
-       res.redirect("/collection?message=true");
-    });
+    if(req.body.name !== "") {
+        mtg.card.where({ name: req.body.name })
+        .then(cards => {
+            if(cards.length > 0) {
+                collection.push(cards.filter(card => typeof card.imageUrl !== 'undefined')[0]);
+                res.redirect("/collection?message=added");
+            }
+            else {
+                res.redirect("/collection?message=error");
+            }
+        });
+    } else {
+        res.redirect("/collection?message=error");
+    }
 });
 
 // send a form to allow the user to add a new card to their collection
@@ -68,17 +81,20 @@ router.get("/:id", (req, res) => {
 
 // changes and existing card to a new card
 router.patch('/:id', (req, res) => {
-    console.log("In patch!");
-    mtg.card.where({ name: req.body.name })
-    .then(cards => {
-        if(cards.length > 0) {
-            collection[parseInt(req.params.id)] = cards.filter(card => typeof card.imageUrl !== 'undefined')[0];
-            res.redirect(`/collection/${req.params.id}?message=true`);
-        }
-        else {
-            res.redirect(`/collection/${req.params.id}?message=error`);
-        }
-    });
+    if(req.body.name !== "") {
+        mtg.card.where({ name: req.body.name })
+        .then(cards => {
+            if(cards.length > 0) {
+                collection[parseInt(req.params.id)] = cards.filter(card => typeof card.imageUrl !== 'undefined')[0];
+                res.redirect(`/collection/${req.params.id}?message=true`);
+            }
+            else {
+                res.redirect(`/collection/${req.params.id}?message=error`);
+            }
+        });
+    } else {
+        res.redirect(`/collection/${req.params.id}?message=error`);
+    }
 });
 
 // delete route to remove a card from the collection

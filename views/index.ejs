@@ -16,6 +16,30 @@
             </div>
         </section>
     <% } %>
+    <% if(flash === "error") { %>
+        <section class="hero is-danger">
+            <div class="hero-body has-text-centered">
+              <p class="title">
+                Error
+              </p>
+              <p class="subtitle">
+                Error in attempted card creation. Check your entered card name.
+              </p>
+            </div>
+        </section>
+    <% } %>
+    <% if(flash === "added") { %>
+        <section class="hero is-success">
+            <div class="hero-body has-text-centered">
+              <p class="title">
+                Success
+              </p>
+              <p class="subtitle">
+                Card Added
+              </p>
+            </div>
+        </section>
+    <% } %>
 
     <div class="block"></div>
     
